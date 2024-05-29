@@ -1,4 +1,4 @@
-# Screenshot Capture Tool
+# WEBSNAP - A Screenshot Capture Tool
 
 This tool allows you to take screenshots of web pages using the Selenium WebDriver with Google Chrome in headless mode. It reads a list of URLs from a text file and saves the screenshots as PNG images.
 
