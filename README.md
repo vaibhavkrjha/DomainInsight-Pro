@@ -1,83 +1,76 @@
 # WEBSNAP - A Screenshot Capture Tool
 
-This tool allows you to take screenshots of web pages using the Selenium WebDriver with Google Chrome in headless mode. It reads a list of URLs from a text file and saves the screenshots as PNG images.
+This script reads a list of domain names from a text file, opens each domain in a browser, and takes a screenshot of the entire screen, including the browser URL bar. The screenshots are saved with filenames based on the domain names.
 
 ## Prerequisites
 
-Before using this tool, ensure you have the following installed:
+Before you run the script, make sure you have the following installed:
 
 1. Python 3.x
-2. Google Chrome
-3. ChromeDriver compatible with your version of Google Chrome
-4. Required Python packages: `selenium`
+2. `pip` (Python package installer)
+3. Google Chrome browser
+4. ChromeDriver compatible with your Chrome version (Download from [here](https://sites.google.com/a/chromium.org/chromedriver/downloads))
 
-You can install the `selenium` package using pip:
+## Python Packages
 
-```bash
-pip install selenium
+You need to install the following Python packages:
+
+- `selenium`
+- `pillow`
+- `pyautogui`
+
+You can install these packages using `pip`:
+
+```sh
+pip install selenium pillow pyautogui
 ```
 
 ## Setup
 
-1. **Download ChromeDriver**: Download the appropriate version of ChromeDriver from [here](https://sites.google.com/a/chromium.org/chromedriver/downloads) and ensure it is in your system PATH or in the same directory as your script.
+1. **ChromeDriver**: Download ChromeDriver and ensure it is in your system PATH or place it in the same directory as your script.
 
-2. **Create a URLs file**: Create a text file named `urls.txt` in the same directory as your script. Add the URLs you want to take screenshots of, one per line. For example:
+2. **domains.txt**: Create a text file named `domains.txt` in the same directory as your script. Add the domain names you want to capture screenshots of, one per line. Example:
+
     ```
-    https://example.com
-    https://anotherexample.com
+    example.com
+    google.com
+    github.com
     ```
 
 ## Usage
 
-To run the script, use the following command:
+Run the script using Python:
 
-```bash
-python screenshot_capture.py
+```sh
+python script_name.py
 ```
 
-The script will read the URLs from `urls.txt` and save the screenshots as `screenshot_0.png`, `screenshot_1.png`, etc., in the same directory.
+Replace `script_name.py` with the actual name of your script.
 
-## Code Explanation
+## Output
 
-Here's a breakdown of the script:
+The script will:
 
-1. **Imports**:
-    - `time`: To add a delay to allow the page to fully load.
-    - `selenium`: To control the web browser.
-    - `Options` from `selenium.webdriver.chrome.options`: To configure Chrome to run in headless mode.
+1. Read the domain names from `domains.txt`.
+2. Open each domain in Google Chrome.
+3. Capture a screenshot of the entire screen, including the browser URL bar.
+4. Save the screenshots in the same directory as the script, with filenames based on the domain names (dots and slashes replaced by underscores).
 
-2. **Function `take_screenshot(url, output_file)`**:
-    - Configures Chrome to run headless and maximized.
-    - Navigates to the provided URL.
-    - Waits for a few seconds to allow the page to load completely.
-    - Saves a screenshot of the page to the specified output file.
-    - Handles any exceptions that occur and ensures the browser is closed.
+For example, a domain `example.com` will result in a screenshot named `example_com.png`.
 
-3. **Main Script**:
-    - Reads URLs from `urls.txt`.
-    - Iterates over each URL, taking a screenshot and saving it with a unique filename.
+### Notes
 
-## Customization
+- Make sure your machine has a graphical environment available, as the script requires a display to open the browser and take screenshots.
+- If running on a headless server, consider setting up a virtual display using tools like `xvfb` on Linux.
 
-- **Adjusting Load Time**: The script waits for 5 seconds (`time.sleep(5)`) to ensure the page loads completely. You can adjust this duration based on your requirements.
+## Troubleshooting
 
-- **Output Filenames**: Modify the naming convention for output files if needed. Currently, the filenames are `screenshot_0.png`, `screenshot_1.png`, etc.
+1. **ChromeDriver not found**: Ensure ChromeDriver is in your system PATH or in the same directory as your script.
+2. **Permissions**: Ensure the script has permission to read `domains.txt` and write screenshot files.
+3. **Browser Issues**: If Chrome isn't opening, ensure Chrome is installed and updated, and ChromeDriver matches the Chrome version.
 
-## Example
+Feel free to customize the script as needed for your specific use case.
 
-Given a `urls.txt` containing:
-```
-https://www.google.com
-https://www.github.com
-```
+---
 
-Running the script will generate:
-- `screenshot_0.png` (screenshot of Google homepage)
-- `screenshot_1.png` (screenshot of GitHub homepage)
-
-## Notes
-
-- Ensure your `urls.txt` does not contain empty lines or extra whitespace.
-- Running the browser in headless mode means it will not open any window; everything runs in the background.
-
-By following these instructions, you should be able to capture screenshots of web pages automatically using this Python script.
+This README provides detailed instructions on setting up and running the script, along with troubleshooting tips.
