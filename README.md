@@ -1,4 +1,4 @@
-# WEBSNAP - A Screenshot Capture Tool
+# DomainInsight Pro
 
 This Python script reads a list of domain names, retrieves WHOIS information, checks DNS status, captures screenshots of the websites, and compiles all the data into an Excel file. The tool is useful for analyzing domain information, verifying website availability, and documenting the visual appearance of websites.
 
