@@ -134,7 +134,10 @@ for domain in domains:
     hosting_ip, hosting_org = get_hosting_info(root_domain)
     whois_entry['Hosting IP'] = hosting_ip
     whois_entry['Hosting Organization'] = hosting_org
-
+    
+    # To keep the system awake during analysis and automated screenshot capturing process
+    {"message_id":"04caba5f-a46c-4f6b-b45c-7b08877337a8","conversation_id":"67090d8e-96b8-800d-9919-2bddfcce7a34","source":"mouse","feedback":{"feedback_type":"copy","selected_text":"# Define a function to keep the system awake\nAdd-Type @\"\nusing System;\nusing System.Runtime.InteropServices;\n\npublic class SleepPreventer {\n    [DllImport(\"user32.dll\")]\n    public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, IntPtr dwExtraInfo);\n\n    public static void KeepAwake() {\n        // Simulate mouse movement slightly to prevent sleep\n        mouse_event(0x0001, 1, 0, 0, IntPtr.Zero); // Move mouse right\n        mouse_event(0x0001, -1, 0, 0, IntPtr.Zero); // Move mouse left\n    }\n}\n\"@\n\n# Set an interval to keep the system awake\n$interval = 60 # time in seconds\n\nwhile ($true) {\n    [SleepPreventer]::KeepAwake()\n    Start-Sleep -Seconds $interval\n}\n"},"location":"code-snippet"}
+    
     # Check DNS status
     dns_status, dns_code = check_dns(domain)
 
@@ -163,3 +166,6 @@ output_excel_file = 'BrandAbuse_output.xlsx'
 df.to_excel(output_excel_file, index=False)
 
 print(f"Combined data has been written to {output_excel_file}")
+
+
+
